@@ -1,12 +1,28 @@
+import processing.core.*; 
+import processing.data.*; 
+import processing.event.*; 
+import processing.opengl.*; 
+
+import java.util.HashMap; 
+import java.util.ArrayList; 
+import java.io.File; 
+import java.io.BufferedReader; 
+import java.io.PrintWriter; 
+import java.io.InputStream; 
+import java.io.OutputStream; 
+import java.io.IOException; 
+
+public class Dice extends PApplet {
+
 // Random Casino Dice
 int total, numberDie, numberRows, changeY, valueDie;
-void setup()
+public void setup()
 {
   size(1020,700);
   noLoop();
   total = 0;
 }
-void draw()
+public void draw()
 {
   background(255,0,0);
   int holdx = 0;
@@ -47,14 +63,14 @@ class Die
     x = 0;
     y = changeY;
   }
-  void roll()
+  public void roll()
   {
-    result = int(random(1,7));
+    result = PApplet.parseInt(random(1,7));
   }
-  void show()
+  public void show()
   {
     //side = int(random(30, 76));
-    y = changeY - int(side/2);
+    y = changeY - PApplet.parseInt(side/2);
     stroke(0);
     fill(255);
     rect(x,y,side,side);
@@ -107,8 +123,17 @@ class Die
       
   
 }
-void mouseClicked()
+public void mouseClicked()
 {
   redraw();
   total = 0;
+}
+  static public void main(String[] passedArgs) {
+    String[] appletArgs = new String[] { "Dice" };
+    if (passedArgs != null) {
+      PApplet.main(concat(appletArgs, passedArgs));
+    } else {
+      PApplet.main(appletArgs);
+    }
+  }
 }
